@@ -26,69 +26,117 @@ const About = () => {
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <Section id="about" title="About Me">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="space-y-6"
+          className="space-y-6 relative"
         >
-          <p className="text-lg text-white text-justify">
+          <div className="absolute -left-4 top-0 w-1 h-full bg-primary/20 rounded-full" />
+          <motion.p 
+            className="text-lg text-white/90 text-justify leading-relaxed pl-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             I am a passionate Full Stack Developer and Android Developer with expertise in creating modern, 
             responsive, and user-friendly applications. My journey in software development has equipped me 
             with a strong foundation in both mobile and web development.
-          </p>
-          <p className="text-lg text-white text-justify">
+          </motion.p>
+          <motion.p 
+            className="text-lg text-white/90 text-justify leading-relaxed pl-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
+          >
             I specialize in building Android applications using Kotlin and modern Android development practices, 
             as well as developing full-stack web applications using React and Node.js. My approach focuses on 
             writing clean, maintainable code and creating intuitive user experiences.
-          </p>
-          <p className="text-lg text-white text-justify">
+          </motion.p>
+          <motion.p 
+            className="text-lg text-white/90 text-justify leading-relaxed pl-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             With a strong work ethic and dedication to continuous learning, I consistently push myself to stay 
             updated with the latest technologies and best practices in software development.
-          </p>
-          <p className="text-lg text-white text-justify">
-            I believe in delivering high-quality solutions through meticulous attention to detail and a 
-            commitment to excellence in every project I undertake.
-          </p>
-          <p className="text-lg text-white text-justify">
+          </motion.p>
+          <motion.p 
+            className="text-lg text-white/90 text-justify leading-relaxed pl-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
             I have experience in integrating AI and machine learning capabilities into applications, leveraging 
             technologies like TensorFlow and ML Kit to create intelligent features and smart recommendations 
             that enhance user experiences.
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
           className="grid grid-cols-1 gap-6"
         >
           {skills.map((skill, index) => (
             <motion.div
               key={skill.category}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-background-dark p-6 rounded-lg shadow-md border hover:scale-105 transition duration-300 border-background-light"
+              variants={itemVariants}
+              className="bg-background-dark/50 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-background-light/20 hover:border-primary/50 transition-all duration-300 group"
             >
               <div className="flex items-center mb-4">
-                <div className="text-primary text-2xl mr-3">{skill.icon}</div>
-                <h3 className="text-xl font-semibold text-white">{skill.category}</h3>
+                <motion.div 
+                  className="text-primary text-3xl mr-4 group-hover:scale-110 transition-transform duration-300"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {skill.icon}
+                </motion.div>
+                <h3 className="text-xl font-semibold text-white group-hover:text-primary transition-colors">
+                  {skill.category}
+                </h3>
               </div>
               <div className="flex flex-wrap gap-2">
                 {skill.items.map((item) => (
-                  <span
+                  <motion.span
                     key={item}
-                    className="px-3 py-1 bg-background-light text-white rounded-full text-sm hover:text-primary hover:border-primary transition-colors"
+                    whileHover={{ scale: 1.05 }}
+                    className="px-3 py-1 bg-background-light/30 text-white rounded-full text-sm border border-transparent hover:border-primary hover:text-primary transition-all duration-300"
                   >
                     {item}
-                  </span>
+                  </motion.span>
                 ))}
               </div>
             </motion.div>

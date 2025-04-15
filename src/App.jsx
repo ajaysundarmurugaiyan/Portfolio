@@ -14,8 +14,8 @@ function App() {
       <main>
         <Hero />
         <About />
-        <Projects />
         <WebProjects />
+        <Projects />
         <Contact />
       </main>
       <Chatbot />
